@@ -254,7 +254,11 @@ async function main() {
                 })
             } catch (error) {
                 if (error.message.startsWith("Artifact has expired")) {
-                    return setExitMessage(ifNoArtifactFound, "no downloadable artifacts found (expired)")
+                    setExitMessage(ifNoArtifactFound, "no downloadable artifacts found (expired)")
+                    if (ifNoArtifactFound === "fail")
+                        return
+                    else
+                        continue
                 } else {
                     throw new Error(error.message)
                 }
